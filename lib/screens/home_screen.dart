@@ -4,14 +4,9 @@ import 'package:imdb_app/service/api_service.dart';
 import 'package:imdb_app/widgets/home_body.dart';
 import 'package:imdb_app/widgets/home_layout_screen_widget.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

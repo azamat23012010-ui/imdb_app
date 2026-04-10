@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -92,37 +93,44 @@ class HomeBodyWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: 10,
             itemBuilder: (_, int index) {
-              return SizedBox(
-                height: 130,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 108,
-                      width: 74,
-                      margin: EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(movies[index + 10].primaryImage),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/detail',
+                      arguments: movies[index + 10]);
+                },
+                child: SizedBox(
+                  height: 130,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 108,
+                        width: 74,
+                        margin: EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: CachedNetworkImageProvider(
+                                movies[index + 10].primaryImage),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 3),
-                    SizedBox(
-                      width: 74,
-                      child: Text(
-                        movies[index + 10].primaryTitle,
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 10,
+                      SizedBox(height: 3),
+                      SizedBox(
+                        width: 74,
+                        child: Text(
+                          movies[index + 10].primaryTitle,
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10,
+                          ),
+                          softWrap: false,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        softWrap: false,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
