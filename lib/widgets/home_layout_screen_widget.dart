@@ -142,3 +142,24 @@ Widget buildSkeleton() {
     ),
   );
 }
+
+
+class TrailerShimmer extends StatelessWidget {
+  const TrailerShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+     baseColor: const Color(0xFF2A2A2A),
+    highlightColor: const Color(0xFF3A3A3A),
+      child: Container(
+        height: 90,
+        width: 150,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(25),
+        ),
+      ),
+    );
+  }
+}

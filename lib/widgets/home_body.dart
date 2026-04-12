@@ -13,6 +13,7 @@ class HomeBodyWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 5,),
         SizedBox(
           height: 150,
           child: CarouselSlider.builder(
@@ -30,7 +31,7 @@ class HomeBodyWidget extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     image: NetworkImage(movies[index].primaryImage),
                   ),
                 ),
@@ -42,7 +43,7 @@ class HomeBodyWidget extends StatelessWidget {
                       width: 300,
                       child: Text(
                         '"${movies[index].primaryTitle}" ${movies[index].productionCompanies.first.name}',
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.workSans(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -68,7 +69,7 @@ class HomeBodyWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'Featured today',
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w600,
               fontSize: 16,
             ),
@@ -78,7 +79,7 @@ class HomeBodyWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'New and Upcoming Prequels, Sequels, and Spin-Offs',
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w500,
               fontSize: 12,
               color: Color(0xffB4B4B4),
@@ -86,62 +87,13 @@ class HomeBodyWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 4),
-        SizedBox(
-          height: 130,
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (_, int index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/detail',
-                      arguments: movies[index + 10]);
-                },
-                child: SizedBox(
-                  height: 130,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 108,
-                        width: 74,
-                        margin: EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: CachedNetworkImageProvider(
-                                movies[index + 10].primaryImage),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 3),
-                      SizedBox(
-                        width: 74,
-                        child: Text(
-                          movies[index + 10].primaryTitle,
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10,
-                          ),
-                          softWrap: false,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+        CustomListView(movies: movies, addindex: 10, istext: true),
         SizedBox(height: 5),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'Has Your Favorite Show Been Renewed or Canceled?',
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w500,
               fontSize: 12,
               color: Color(0xffB4B4B4),
@@ -149,34 +101,13 @@ class HomeBodyWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 4),
-        SizedBox(
-          height: 108,
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (_, int index) {
-              return Container(
-                height: 108,
-                width: 74,
-                margin: EdgeInsets.only(right: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(movies[index + 20].primaryImage),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+        CustomListView(movies: movies, addindex: 20, istext: false),
         SizedBox(height: 12),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'What to watch',
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w700,
               fontSize: 16,
             ),
@@ -186,7 +117,7 @@ class HomeBodyWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'New and Upcoming Prequels, Sequels, and Spin-Offs',
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w500,
               fontSize: 12,
               color: Color(0xffB4B4B4),
@@ -194,50 +125,81 @@ class HomeBodyWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 4),
-        SizedBox(
-          height: 130,
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (_, int index) {
-              return SizedBox(
-                height: 130,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 108,
-                      width: 74,
-                      margin: EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(movies[index + 30].primaryImage),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 3),
-                    SizedBox(
-                      width: 74,
-                      child: Text(
-                        movies[index + 30].primaryTitle,
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 10,
-                        ),
-                        softWrap: false,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
+        CustomListView(movies: movies, addindex: 30, istext: true),
+      ],
+    );
+  }
+}
+
+class CustomListView extends StatelessWidget {
+  const CustomListView({
+    super.key,
+    required this.movies,
+    required this.addindex,
+    required this.istext,
+  });
+
+  final List<MovieModel> movies;
+  final int addindex;
+  final bool istext;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 130,
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (_, int index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/detail',
+                arguments: movies[index + addindex],
               );
             },
-          ),
-        ),
-      ],
+            child: SizedBox(
+              height: 130,
+              child: Column(
+                children: [
+                  Container(
+                    height: 108,
+                    width: 74,
+                    margin: EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(
+                          movies[index + addindex].primaryImage,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 3),
+                  istext == true
+                      ? SizedBox(
+                          width: 74,
+                          child: Text(
+                            movies[index + addindex].primaryTitle,
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                            ),
+                            softWrap: false,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      : SizedBox(),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:imdb_app/models/movie_model.dart';
 import 'package:imdb_app/screens/detail_screen.dart';
 import 'package:imdb_app/screens/home_screen.dart';
+import 'package:imdb_app/screens/main.dart';
 import 'package:imdb_app/screens/no_internet_screen.dart';
 
 class AppRouter {
   static Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case '/main':
+        return onPage(Main());
       case '/home':
         return onPage(HomeScreen());
       case '/no_internet':

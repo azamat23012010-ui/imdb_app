@@ -15,6 +15,7 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: CrystalNavigationBar(
         currentIndex: index,
         onTap: (v) {

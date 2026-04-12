@@ -1,7 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:imdb_app/router/app_router.dart';
-import 'package:imdb_app/screens/main.dart';
 
 // * Global context -> home / detail ozi context aniqlab olib beradi
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
@@ -25,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       if (status.contains(ConnectivityResult.none)) {
         Navigator.pushNamed(navigatorKey.currentContext!, '/no_internet');
       } else {
-        Navigator.pushReplacementNamed(navigatorKey.currentContext!, '/home');
+        Navigator.pushReplacementNamed(navigatorKey.currentContext!, '/main');
       }
     });
   }
@@ -35,7 +34,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       navigatorKey: navigatorKey,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: '/home',
+      initialRoute: '/main',
       theme: ThemeData.dark(),
     );
   }

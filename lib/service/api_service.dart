@@ -9,7 +9,7 @@ class ApiService {
   static final String adUrl =
       'https://imdb236.p.rapidapi.com/api/imdb/top250-movies';
   static final String rapidKey =
-      '43515ea0e0msh36418637c8ad649p1a359djsn300aec645c79';
+      '01d9a2d442msh33c2e4b386d01f3p1613f1jsn6acd035b0729';
   static Future<List<MovieModel>> getMovies() async {
     try {
       final response = await http.get(

@@ -11,52 +11,68 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: FutureBuilder(
-          future: ApiService.getMovies(),
-          builder: (context, snap) {
-            if (snap.connectionState == ConnectionState.waiting) {
-              return buildSkeleton();
-            }
-
-            if (snap.hasError) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      padding: EdgeInsets.all(20),
-                      height: 200,
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Exception",
-                              style: GoogleFonts.poppins(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: FutureBuilder(
+            future: ApiService.getMovies(),
+            builder: (context, snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return buildSkeleton();
+              }
+          
+              if (snap.hasError) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        padding: EdgeInsets.all(20),
+                        height: 200,
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Exception",
+                                style: GoogleFonts.workSans(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(snap.error.toString(),style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 15),),
-                          ],
+                              SizedBox(height: 10),
+                              Text(
+                                snap.error.toString(),
+                                style: GoogleFonts.workSans(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  );
+                });
+          
+                return const SizedBox(); // UI bo‘sh turadi
+              }
+          
+              if (!snap.hasData || snap.data == null) {
+                return Center(
+                  child: Text(
+                    "No data",
+                    style: GoogleFonts.workSans(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                    ),
+                  ),
                 );
-              });
-
-              return const SizedBox(); // UI bo‘sh turadi
-            }
-
-            if (!snap.hasData || snap.data == null) {
-              return  Center(child: Text("No data",style: GoogleFonts.poppins(fontWeight: FontWeight.w500,fontSize: 14),));
-            }
-
-            return HomeBodyWidget(movies: snap.data!);
-          },
+              }
+          
+              return HomeBodyWidget(movies: snap.data!);
+            },
+          ),
         ),
       ),
     );
