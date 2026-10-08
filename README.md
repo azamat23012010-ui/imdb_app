@@ -65,8 +65,11 @@ lib/
 git clone https://github.com/azamat23012010-ui/imdb_app.git
 cd imdb_app
 flutter pub get
-flutter run
+cp env.example.json env.json   # then put your key inside env.json
+flutter run --dart-define-from-file=env.json
 ```
+
+> 🔑 Get an API key for the [IMDb API on RapidAPI](https://rapidapi.com). `env.json` is git-ignored, so your key never gets committed.
 
 ---
 

@@ -8,8 +8,8 @@ import 'package:imdb_app/models/movie_model.dart';
 class ApiService {
   static final String adUrl =
       'https://imdb236.p.rapidapi.com/api/imdb/top250-movies';
-  static final String rapidKey =
-      '01d9a2d442msh33c2e4b386d01f3p1613f1jsn6acd035b0729';
+  // API key is passed at build time — see README (env.json, not committed).
+  static const String rapidKey = String.fromEnvironment('RAPID_API_KEY');
   static Future<List<MovieModel>> getMovies() async {
     try {
       final response = await http.get(
